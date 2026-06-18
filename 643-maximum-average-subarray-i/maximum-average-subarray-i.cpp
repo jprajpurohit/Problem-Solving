@@ -1,19 +1,21 @@
 class Solution {
-    public:
-     double findMaxAverage(vector<int>& nums, int k) {
-        long sum = 0;
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        int global = 0;
 
         for (int i = 0; i < k; i++) {
-            sum += nums[i];
+            global += nums[i];
         }
 
-        long maxSum = sum;
+        int maxSum = global;
 
         for (int i = k; i < nums.size(); i++) {
-            sum += nums[i] - nums[i - k];
-            maxSum = max(maxSum, sum);
+            global += nums[i];
+            global -= nums[i - k];
+
+            maxSum = std::max(maxSum, global);
         }
 
-        return (double) maxSum / k;
+        return (double)maxSum / k;
     }
 };
